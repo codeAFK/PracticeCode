@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>HTML Calculator</title>
+
+  <!-- For styling -->
+  <style>
+    table {
+      border: 1px solid black;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    input[type="button"] {
+      width: 100%;
+      padding: 20px 40px;
+      background-color: green;
+      color: white;
+      font-size: 24px;
+      font-weight: bold;
+      border: none;
+      border-radius: 5px;
+    }
+
+    input[type="text"] {
+      padding: 20px 30px;
+      font-size: 24px;
+      font-weight: bold;
+      border: none;
+      border-radius: 5px;
+      border: 2px solid black;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Create table -->
+  <table id="calcu">
+    <tr>
+      <td colspan="3">
+        <input type="text" id="result">
+      </td>
+      <td><input type="button" value="c"></td>
+    </tr>
+
+    <tr>
+      <td><input type="button" value="1"></td>
+      <td><input type="button" value="2"></td>
+      <td><input type="button" value="3"></td>
+      <td><input type="button" value="/"></td>
+    </tr>
+    <tr>
+      <td><input type="button" value="4"></td>
+      <td><input type="button" value="5"></td>
+      <td><input type="button" value="6"></td>
+      <td><input type="button" value="*"></td>
+    </tr>
+    <tr>
+      <td><input type="button" value="7"></td>
+      <td><input type="button" value="8"></td>
+      <td><input type="button" value="9"></td>
+      <td><input type="button" value="-"></td>
+    </tr>
+    <tr>
+      <td><input type="button" value="0"></td>
+      <td><input type="button" value="."></td>
+      <td><input type="button" value="="></td>
+      <td><input type="button" value="+"></td>
+    </tr>
+  </table>
+
+  <!-- Add JavaScript -->
+  <script>
+    let resultInput = document.getElementById("result");
+
+    // Add event listeners to all buttons
+    let buttons = document.querySelectorAll("input[type='button']");
+    buttons.forEach((button) => {
+      button.addEventListener("click", (event) => {
+        let buttonText = event.target.value;
+        if (buttonText === "=") {
+          // Evaluate the expression when "=" is clicked
+          try {
+            resultInput.value = eval(resultInput.value);
+          } catch (error) {
+            resultInput.value = "Error";
+          }
+        } else if (buttonText === "c") {
+          // Clear the input field when "c" is clicked
+          resultInput.value = "";
+        } else {
+          // Append the button text to the input field
+          resultInput.value += buttonText;
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>

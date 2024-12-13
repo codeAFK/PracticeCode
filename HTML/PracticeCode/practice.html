@@ -1,0 +1,40 @@
+<div id="circle"></div>
+
+<style>
+    #circle {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background-color: #fff;
+    position: relative;
+  }
+  
+  #circle:hover {
+    cursor: grabbing;
+  }
+</style>
+
+<script>
+    const circle = document.getElementById('circle');
+let hue = 0;
+
+function rainbowColor() {
+  hue = (hue + 1) % 360;
+  circle.style.background = `hsl(${hue}, 100%, 50%)`;
+  requestAnimationFrame(rainbowColor);
+}
+
+rainbowColor();
+
+circle.addEventListener('mousemove', (e) => {
+  const x = e.clientX;
+  const y = e.clientY;
+  const rect = circle.getBoundingClientRect();
+  const centerX = rect.left + rect.width / 2;
+  const centerY = rect.top + rect.height / 2;
+  const distance = Math.sqrt(Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2));
+  const angle = Math.atan2(y - centerY, x - centerX) * 180 / Math.PI;
+  const avoidHue = (angle + 180) % 360;
+  circle.style.background = `hsl(${avoidHue}, 100%, 50%)`;
+});
+</script>
